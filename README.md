@@ -79,5 +79,4 @@ Libre para usar y modificar
 
 ---
 
-**¿Necesitas ayuda?** Lee `FIREBASE_SETUP.md` paso a paso 📖
 
