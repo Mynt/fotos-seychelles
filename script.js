@@ -575,6 +575,13 @@ function diagnoseImages() {
     });
 }
 
+// Escapar HTML para evitar XSS en comentarios
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.appendChild(document.createTextNode(text));
+    return div.innerHTML;
+}
+
 // Ejecutar diagnóstico
 diagnoseImages();
 
