@@ -428,19 +428,25 @@ async function loadComments() {
     try {
         const querySnapshot = await db.collection('comments')
             .where('photo', '==', photo)
-            .orderBy('date', 'desc')
             .get();
-        
+
+        const comments = [];
+        querySnapshot.forEach(doc => comments.push({ id: doc.id, ...doc.data() }));
+        comments.sort((a, b) => {
+            const da = a.date?.toDate ? a.date.toDate() : new Date(a.date);
+            const db2 = b.date?.toDate ? b.date.toDate() : new Date(b.date);
+            return db2 - da;
+        });
+
         commentsList.innerHTML = '';
-        
-        if (querySnapshot.empty) {
+
+        if (comments.length === 0) {
             commentsList.innerHTML = '<p class="no-comments">Sin comentarios aún. ¡Sé el primero en comentar!</p>';
         } else {
-            querySnapshot.forEach(doc => {
-                const comment = doc.data();
+            comments.forEach(comment => {
                 const commentDiv = document.createElement('div');
                 commentDiv.className = 'comment';
-                const date = new Date(comment.date.toDate ? comment.date.toDate() : comment.date);
+                const date = new Date(comment.date?.toDate ? comment.date.toDate() : comment.date);
                 commentDiv.innerHTML = `
                     <p class="comment-text">${escapeHtml(comment.text)}</p>
                     <p class="comment-time">${date.toLocaleString('es-ES')}</p>
