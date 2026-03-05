@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería de Fotos</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📸 Nosotros en Seychelles</h1>
+            <p class="subtitle">Haz clic en cualquier foto para verla en grande</p>
+        </header>
+
+        <div class="gallery" id="gallery">
+            <!-- Las fotos se cargarán aquí con JavaScript -->
+        </div>
+    </div>
+
+    <!-- Modal para ver foto en grande -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <button class="close">&times;</button>
+            
+            <div class="modal-body">
+                <img id="modalImage" src="" alt="Foto ampliada">
+                
+                <div class="modal-info">
+                    <h2 id="photoName"></h2>
+                    
+                    <div class="comments-section">
+                        <h3>Comentarios</h3>
+                        
+                        <div id="commentsList" class="comments-list">
+                            <!-- Los comentarios se cargarán aquí -->
+                        </div>
+                        
+                        <div class="comment-form">
+                            <textarea id="commentInput" placeholder="Añade un comentario..." maxlength="500"></textarea>
+                            <button id="addCommentBtn" class="btn-add-comment">Agregar Comentario</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-nav">
+                <button id="prevBtn" class="nav-btn">← Anterior</button>
+                <span id="photoCounter"></span>
+                <button id="nextBtn" class="nav-btn">Siguiente →</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
